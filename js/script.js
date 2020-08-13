@@ -2,15 +2,19 @@
 Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
-
 // For assistance:
 // Check the "Project Resources" section of the project instructions
 // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
+/**********************************************************************************************************************************
+                                            I am looking to 'Exceed Expectations.'
+**********************************************************************************************************************************/
+
+// Objective: to create a web app that displays 5+ quotes in a specified format
+
 /***
  * `quotes` array
  ***/
-
 const quotes = [
   {
     quote:
@@ -48,22 +52,22 @@ const quotes = [
     quote:
       "It takes considerable knowledge just to realize the extent of your own ignorance.",
     source: "Thomas Sowell", //who said it
-    citation: "Unknown", //where it's from
-    year: "Unknown",
+    citation: "Unknown Origin Source", //where it's from
+    year: "Unknown Year",
     image: "images/thomasSowell.jpg",
     tag: "Economy", //category
-    bibliography: "https://www.goodreads.com/author/quotes/2056.Thomas_Sowell",
+    bibliography: "https://www.goodreads.com/author/quotes/2056.Thomas_Sowell", // don't display. for source reference only
   },
   {
     quote:
       "Better to remain silent and be thought a fool than to speak out and remove all doubt.",
-    source: "Uknown", //who said it
-    citation: "Uknown", //where it's from
-    year: "Uknown",
+    source: "Uknown Author", //who said it
+    citation: "Uknown Origin Year", //where it's from
+    year: "Uknown Year",
     image: "images/unknown.jpg",
     tag: "Knowledge", //category
     bibliography:
-      "https://www.treasurequotes.com/quotes/better-to-remain-silent-and-be-thought-a-fool",
+      "https://www.treasurequotes.com/quotes/better-to-remain-silent-and-be-thought-a-fool", // don't display. for source reference only
   },
   {
     quote:
@@ -74,7 +78,7 @@ const quotes = [
     image: "images/tiana.png",
     tag: "Movie", //category
     bibliography:
-      "https://www.sweetyhigh.com/read/tiana-princess-and-the-frog-quotes-captions-010419",
+      "https://www.sweetyhigh.com/read/tiana-princess-and-the-frog-quotes-captions-010419", // don't display. for source reference only
   },
   {
     quote: "I'm gonna make him an offer he can't refuse.",
@@ -83,7 +87,7 @@ const quotes = [
     year: 1972,
     image: "images/donVitoCorleone.jpg",
     tag: "Movie", //category
-    bibliography: "https://www.rottentomatoes.com/m/godfather/quotes/",
+    bibliography: "https://www.rottentomatoes.com/m/godfather/quotes/", // don't display. for source reference only
   },
   {
     quote: "This is business. Not personal.",
@@ -92,7 +96,7 @@ const quotes = [
     year: 1972,
     image: "images/tomHagen.jpg",
     tag: "Movie", //category
-    bibliography: "https://www.rottentomatoes.com/m/godfather/quotes/",
+    bibliography: "https://www.rottentomatoes.com/m/godfather/quotes/", // don't display. for source reference only
   },
   {
     quote:
@@ -102,7 +106,7 @@ const quotes = [
     year: 2009,
     image: "images/ray.jpg",
     tag: "Movie", //category
-    bibliography: "https://www.imdb.com/title/tt0780521/characters/nm0191906",
+    bibliography: "https://www.imdb.com/title/tt0780521/characters/nm0191906", // don't display. for source reference only
   },
 ];
 
@@ -110,14 +114,51 @@ const quotes = [
  * `getRandomQuote` function
  ***/
 
-function getRandomQuote
+function getRandomQuote() {
+  //this function provides a random quote & its properties from the quotes array
+  let upperBounds = quotes.length - 1; //random number not to exceed max amount of entries in the 'quotes' array
+  let lowerBounds = 0; //random number not to go below 0
+  let randomNumber = Math.floor(
+    Math.random() * (upperBounds - lowerBounds + 1) + lowerBounds
+  );
+  console.log(randomNumber);
+
+  let quote = quotes[randomNumber];
+  console.log(quote.quote);
+  console.log(quote.source);
+  console.log(quote.year);
+  console.log(quote.citation);
+  console.log(quote.tag);
+  console.log(quote.image);
+  setTimeout(function () {
+    window.location.reload(1);
+  }, 15000);
+  return quote;
+}
 
 /***
  * `printQuote` function
  ***/
 
+let html = "";
 
+function printQuote() {
+  //this function displays the quote properties in the specified format below on a web page
+  let quote = getRandomQuote();
+  html = `
+  <p class="quote">${quote.quote}</p>
+    
+  <p class="source">${quote.source}<span class="citation">${quote.citation}</span><span class="year">${quote.year}</span></p>
+   
+    <img src="${quote.image}" alt="${quote.source}">
+    
+    <a href="index.html" class="tag">#${quote.tag}</a>
+    
+  `;
+  document.querySelector("div").innerHTML = html;
+}
 
+printQuote();
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
