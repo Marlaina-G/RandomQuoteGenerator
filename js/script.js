@@ -52,8 +52,6 @@ const quotes = [
     quote:
       "It takes considerable knowledge just to realize the extent of your own ignorance.",
     source: "Thomas Sowell", //who said it
-    citation: "Unknown Origin Source", //where it's from
-    year: "Unknown Year",
     image: "images/thomasSowell.jpg",
     tag: "Economy", //category
     bibliography: "https://www.goodreads.com/author/quotes/2056.Thomas_Sowell", // don't display. for source reference only
@@ -61,9 +59,7 @@ const quotes = [
   {
     quote:
       "Better to remain silent and be thought a fool than to speak out and remove all doubt.",
-    source: "Uknown Author", //who said it
-    citation: "Uknown Origin Year", //where it's from
-    year: "Uknown Year",
+    source: "Unknown Author", //who said it
     image: "images/unknown.jpg",
     tag: "Knowledge", //category
     bibliography:
@@ -139,7 +135,7 @@ function changeColors() {
   let color1 = colors.length - 1;
   let color2 = 0;
   let randomColor = Math.floor(Math.random() * (color1 - color2 + 1) + color2);
-  let color = colors[randomColor];
+  let color = colors[randomColor]; //generates a random color based on the inputs provided in the 'colors' array
   document.body.style.backgroundColor = color; // used StackOverflow to aid in setup
   return color;
 }
@@ -165,29 +161,36 @@ function getRandomQuote() {
 let html = "";
 
 function printQuote() {
-  //this function displays the quote properties in the specified format below on a web page
+  //this function displays the quote properties in the specified format below on a web page //
   let quote = getRandomQuote();
   html = `
-  
-  <p class="quote">${quote.quote}</p>
-    
-  <p class="source">${quote.source}<span class="citation">${quote.citation}</span><span class="year">${quote.year}</span></p>
-   
   <img src="${quote.image}" alt="${quote.source}">
     
-  <a href="index.html" class="tag">#${quote.tag}</a>
+  <a class="tag">#${quote.tag}</a>
+
+  <p class="quote">${quote.quote}</p>
     
+  <p class="source">${quote.source}  
   `;
+
+  if (quote.citation !== undefined) {
+    html += `<span class="citation">${quote.citation}</span>`;
+  }
+  if (quote.year !== undefined) {
+    html += `<span class="year">${quote.year}</span>`;
+  }
+
   document.querySelector("div").innerHTML = html;
 }
 
 printQuote();
 
-setTimeout(function () {
+setInterval(function () {
   // used StackOverflow to aid in setup
   //reloads the page with another quote every 15 seconds
   location = "";
-}, 15000);
+}, 10000);
+
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!

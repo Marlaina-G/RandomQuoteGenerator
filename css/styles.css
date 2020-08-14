@@ -121,13 +121,13 @@ img {
   padding: 3.5px;
   width: 110px;
   position: relative;
-  left: 750px;
+  right: 50px;
 }
 
 .tag {
-  position: relative;
-  left: 650px;
-  top: 20px;
+  position: absolute;
+  left: 300px;
+  top: 375px;
 }
 
 
