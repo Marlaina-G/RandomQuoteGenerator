@@ -114,6 +114,36 @@ const quotes = [
  * `getRandomQuote` function
  ***/
 
+function changeColors() {
+  //changes background color with every refresh/reload
+  const colors = [
+    "#CD5C5C",
+    "#F08080",
+    "#FA8072",
+    "#E9967A",
+    "#FFA07A",
+    "#000000",
+    "#454545",
+    "#999999",
+    "#800000",
+    "#808000",
+    "#008080",
+    "#800080",
+    "#FAEBD7",
+    "#FFEBCD",
+    "#7FFFD4",
+    "#F0F8FF",
+    "#DEB887",
+    "#3CB371",
+  ];
+  let color1 = colors.length - 1;
+  let color2 = 0;
+  let randomColor = Math.floor(Math.random() * (color1 - color2 + 1) + color2);
+  let color = colors[randomColor];
+  document.body.style.backgroundColor = color; // used StackOverflow to aid in setup
+  return color;
+}
+
 function getRandomQuote() {
   //this function provides a random quote & its properties from the quotes array
   let upperBounds = quotes.length - 1; //random number not to exceed max amount of entries in the 'quotes' array
@@ -121,18 +151,10 @@ function getRandomQuote() {
   let randomNumber = Math.floor(
     Math.random() * (upperBounds - lowerBounds + 1) + lowerBounds
   );
-  console.log(randomNumber);
 
   let quote = quotes[randomNumber];
-  console.log(quote.quote);
-  console.log(quote.source);
-  console.log(quote.year);
-  console.log(quote.citation);
-  console.log(quote.tag);
-  console.log(quote.image);
-  setTimeout(function () {
-    window.location.reload(1);
-  }, 15000);
+  changeColors();
+
   return quote;
 }
 
@@ -146,19 +168,26 @@ function printQuote() {
   //this function displays the quote properties in the specified format below on a web page
   let quote = getRandomQuote();
   html = `
+  
   <p class="quote">${quote.quote}</p>
     
   <p class="source">${quote.source}<span class="citation">${quote.citation}</span><span class="year">${quote.year}</span></p>
    
-    <img src="${quote.image}" alt="${quote.source}">
+  <img src="${quote.image}" alt="${quote.source}">
     
-    <a href="index.html" class="tag">#${quote.tag}</a>
+  <a href="index.html" class="tag">#${quote.tag}</a>
     
   `;
   document.querySelector("div").innerHTML = html;
 }
 
 printQuote();
+
+setTimeout(function () {
+  // used StackOverflow to aid in setup
+  //reloads the page with another quote every 15 seconds
+  location = "";
+}, 15000);
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
